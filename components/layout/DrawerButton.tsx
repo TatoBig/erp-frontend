@@ -5,7 +5,7 @@ type Props = {
 };
 
 const DrawerButton = ({ children }: Props) => {
-  return <div className="bg-orange-200 ml-4 border-b-2 border-black p-2">{children}</div>;
+  return <div className="ml-4 border-b-2 border-gray-300 hover:bg-gray-300 smooth p-2 text-sm">{children}</div>;
 };
 
 export default DrawerButton;

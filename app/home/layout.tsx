@@ -11,7 +11,7 @@ export default function MainLayout({
     <>
       <div className="flex">
         <LayoutDrawer />
-        <div className="p-4">{children}</div>
+        <div className="p-4 shadow-xl w-full">{children}</div>
       </div>
     </>
   );
