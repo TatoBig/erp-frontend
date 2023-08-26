@@ -41,12 +41,13 @@ function LayoutDrawer() {
             </div>
             <div className="flex w-full">
               <div className="w-0.5 rounded-full mt-4 bg-gray-300" />
-              <AnimatePresence>
-                {option === 'dashboard' && (
+              <AnimatePresence mode="wait">
+                {option === "dashboard" && (
                   <motion.div
+                    key="dashboard"
                     className="mt-4 w-full"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { delay: 0.5 } }}
+                    animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
                     <DrawerButton>Web Analytics</DrawerButton>
@@ -54,17 +55,16 @@ function LayoutDrawer() {
                     <DrawerButton>Ad Campaign</DrawerButton>
                   </motion.div>
                 )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {option === 'manufacture' && (
+                {option === "manufacture" && (
                   <motion.div
+                    key="manufacture"
                     className="mt-4 w-full"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { delay: 0.5 } }}
+                    animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
                     <DrawerButton>Web S</DrawerButton>
-                    <DrawerButton>Sales S</DrawerButton>
+                    <DrawerButton>s S</DrawerButton>
                     <DrawerButton>Ad S</DrawerButton>
                   </motion.div>
                 )}
