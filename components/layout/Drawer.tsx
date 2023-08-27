@@ -3,12 +3,31 @@ import { PiPackage } from "react-icons/pi";
 import DrawerButton from "./DrawerButton";
 import DrawerIcon from "./DrawerIcon";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, stagger } from "framer-motion";
+import Disappear from "../animation/Disappear";
+import MenuOptions from "@/types/MenuOptions";
+
+const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
 function LayoutDrawer() {
-  const [module, setModule] = useState("dashboard");
-  const [isVisible, setIsVisible] = useState(false);
-  const [option, setOption] = useState("dashboard");
+  const [currentOption, setCurrentOption] = useState("dashboard");
+
+  const menuOptions: MenuOptions = {
+    dashboard: {
+      title: "Dashboard",
+      description:
+        "Ofrece una vista visual de datos empresariales clave para decisiones informadas.",
+      options: ["Web Analytics", "Sales Monitoring", "Ad Campaign"],
+      icon: AiOutlineDashboard,
+    },
+    manufacture: {
+      title: "Manufactura",
+      description:
+        "Optimiza procesos de producción y control de inventario para mejorar la eficiencia y calidad.",
+      options: ["Web S", "s S", "Ad S"],
+      icon: PiPackage,
+    },
+  };
 
   return (
     <>
@@ -20,57 +39,43 @@ function LayoutDrawer() {
           </div>
           <div>close</div>
         </div>
-        <div className="flex">
-          <div className="p-2 w-20">
-            <DrawerIcon
-              label="Dashboard"
-              option={() => setOption("dashboard")}
-              icon={AiOutlineDashboard}
-            />
-            <DrawerIcon
-              label="Manufactura"
-              option={() => setOption("manufacture")}
-              icon={PiPackage}
-            />
+        <div className="flex ">
+          <div className="p-2 w-20 ">
+            {Object.keys(menuOptions).map((option) => (
+              <DrawerIcon
+                label={menuOptions[option].title}
+                option={() => setCurrentOption(option)}
+                icon={menuOptions[option].icon}
+                key={option}
+              />
+            ))}
           </div>
-          <div className="w-full">
-            <div className="text-xl font-bold">Dashboard</div>
-            <div className="text-xs mt-2">
-              Choose between layouts to experience different look and feel for
-              your projects.
-            </div>
-            <div className="flex w-full">
-              <div className="w-0.5 rounded-full mt-4 bg-gray-300" />
-              <AnimatePresence mode="wait">
-                {option === "dashboard" && (
-                  <motion.div
-                    key="dashboard"
-                    className="mt-4 w-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+          <AnimatePresence mode="wait">
+            {Object.keys(menuOptions).map(
+              (option) =>
+                currentOption === option && (
+                  <Disappear
+                    key={option}
+                    currentOption={currentOption}
+                    className="w-full"
                   >
-                    <DrawerButton>Web Analytics</DrawerButton>
-                    <DrawerButton>Sales Monitoring</DrawerButton>
-                    <DrawerButton>Ad Campaign</DrawerButton>
-                  </motion.div>
-                )}
-                {option === "manufacture" && (
-                  <motion.div
-                    key="manufacture"
-                    className="mt-4 w-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <DrawerButton>Web S</DrawerButton>
-                    <DrawerButton>s S</DrawerButton>
-                    <DrawerButton>Ad S</DrawerButton>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+                    <div className="text-xl font-bold"></div>
+                    {menuOptions[option].title}
+                    <div className="text-xs mt-2">
+                      {menuOptions[option].description}
+                    </div>
+                    <div className="flex w-full">
+                      <div className="w-0.5 rounded-full mt-4 bg-gray-300" />
+                      <div className="mt-4 mr-4 w-full">
+                        {menuOptions[option].options.map((option) => (
+                          <DrawerButton key={option}>{option}</DrawerButton>
+                        ))}
+                      </div>
+                    </div>
+                  </Disappear>
+                )
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </>
