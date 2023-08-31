@@ -1,11 +1,16 @@
 import { IconType } from "react-icons";
 
+type Option = {
+  title: string;
+  url: string;
+};
+
 type MenuOptions = {
   [key: string]: {
     title: string;
     icon: IconType;
     description: string;
-    options: string[];
+    options: Option[];
   };
 };
 

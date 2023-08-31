@@ -17,14 +17,32 @@ function LayoutDrawer() {
       title: "Dashboard",
       description:
         "Ofrece una vista visual de datos empresariales clave para decisiones informadas.",
-      options: ["Web Analytics", "Sales Monitoring", "Ad Campaign"],
+      options: [
+        {
+          title: "Visualización general",
+          url: "/dashboard/overview",
+        },
+      ],
       icon: AiOutlineDashboard,
     },
     manufacture: {
       title: "Manufactura",
       description:
         "Optimiza procesos de producción y control de inventario para mejorar la eficiencia y calidad.",
-      options: ["Web S", "s S", "Ad S"],
+      options: [
+        {
+          title: "Muestras de lote",
+          url: "/manufacture/batch-samples",
+        },
+        {
+          title: "Órdenes de compra",
+          url: "/manufacture/purchase-orders",
+        },
+        {
+          title: "Inventario",
+          url: "/manufacture/inventory",
+        },
+      ],
       icon: PiPackage,
     },
   };
@@ -68,7 +86,9 @@ function LayoutDrawer() {
                       <div className="w-0.5 rounded-full mt-4 bg-gray-300" />
                       <div className="mt-4 mr-4 w-full">
                         {menuOptions[option].options.map((option) => (
-                          <DrawerButton key={option}>{option}</DrawerButton>
+                          <DrawerButton key={option.title} url={option.url}>
+                            {option.title}
+                          </DrawerButton>
                         ))}
                       </div>
                     </div>
