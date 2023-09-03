@@ -11,12 +11,15 @@ import {
   Thead,
   Tfoot,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Manufacture = () => {
+  const router = useRouter()
+  
   return (
     <PageInfo
-      onClick={() => console.log("")}
+      onClick={() => router.push('/manufacture/batch-samples/new')}
       header={"Muestras de lote"}
       buttonText="Generar nueva muestra"
     >

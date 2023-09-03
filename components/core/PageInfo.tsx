@@ -1,11 +1,11 @@
-import { Button, Heading, Text } from "@chakra-ui/react";
+import { Button, Divider, Heading, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 type Props = {
-  onClick: () => void;
+  onClick?: () => void;
   header: string;
   children: ReactNode;
-  buttonText: string;
+  buttonText?: string;
 };
 
 const PageInfo = ({ onClick, header, children, buttonText }: Props) => {
@@ -16,14 +16,19 @@ const PageInfo = ({ onClick, header, children, buttonText }: Props) => {
           <Heading as="h2" size="2xl">
             {header}
           </Heading>
-          <Text noOfLines={1}>
+          <Text>
             The quick brown fox jumps over the lazy dog is an English-language
             pangram—a sentence that contains all of the letters of the English
             alphabet. Owing to its existence, Chakra was created.
           </Text>
         </div>
-        <Button onClick={onClick} className="mr-8">{buttonText}</Button>
+        {buttonText && onClick && (
+          <Button onClick={() => onClick()} className="mr-8">
+            {buttonText}
+          </Button>
+        )}
       </div>
+      <Divider className="mt-4 mb-8" />
       <div>{children}</div>
     </div>
   );

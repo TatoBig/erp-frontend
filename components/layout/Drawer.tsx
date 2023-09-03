@@ -1,10 +1,10 @@
 import { AiOutlineDashboard } from "react-icons/ai";
+import { AnimatePresence, stagger } from "framer-motion";
 import { PiPackage } from "react-icons/pi";
+import { useState } from "react";
+import Disappear from "../animation/Disappear";
 import DrawerButton from "./DrawerButton";
 import DrawerIcon from "./DrawerIcon";
-import { useState } from "react";
-import { AnimatePresence, stagger } from "framer-motion";
-import Disappear from "../animation/Disappear";
 import MenuOptions from "@/types/MenuOptions";
 
 const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
