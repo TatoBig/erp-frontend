@@ -33,9 +33,20 @@ export default function SplitScreen() {
               align={'start'}
               justify={'space-between'}>
               <Checkbox>Remember me</Checkbox>
-              <Text color={'blue'}>Forgot password?</Text>
+              <Text color={'blue.500'}>Forgot password?</Text>
             </Stack>
-            <Button colorScheme={'blue'} variant={'solid'}>
+            <Button
+              px={4}
+              fontSize={'sm'}
+              rounded={'full'}
+              bg={'blue.400'}
+              color={'white'}
+              _hover={{
+                bg: 'blue.500',
+              }}
+              _focus={{
+                bg: 'blue.500',
+              }}>
               Sign in
             </Button>
           </Stack>
@@ -46,7 +57,7 @@ export default function SplitScreen() {
           alt={'Login Image'}
           objectFit={'cover'}
           src={
-            'https://img.freepik.com/vector-gratis/ilustracion-concepto_114360-2429.jpg'
+            'https://img.freepik.com/vector-premium/ilustracion-concepto-registro-vector-gratuito_269560-9.jpg?w=2000'
           }
         />
       </Flex>
