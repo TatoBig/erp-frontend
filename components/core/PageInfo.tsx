@@ -1,16 +1,25 @@
 import { Button, Divider, Heading, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   onClick?: () => void;
   header: string;
   children: ReactNode;
   buttonText?: string;
+  key: string;
 };
 
-const PageInfo = ({ onClick, header, children, buttonText }: Props) => {
+const PageInfo = ({ onClick, key, header, children, buttonText }: Props) => {
   return (
-    <div className="py-8 px-4">
+    <motion.div
+      className="py-8 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      key={key}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
       <div className="flex justify-between items-center mb-8">
         <div className="w-1/2">
           <Heading as="h2" size="2xl">
@@ -30,7 +39,7 @@ const PageInfo = ({ onClick, header, children, buttonText }: Props) => {
       </div>
       <Divider className="mt-4 mb-8" />
       <div>{children}</div>
-    </div>
+    </motion.div>
   );
 };
 

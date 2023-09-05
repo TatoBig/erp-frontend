@@ -1,5 +1,6 @@
 import { Button, Card, Divider, Heading } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   onClick?: () => void;
@@ -7,11 +8,26 @@ type Props = {
   children: ReactNode;
   buttonText?: string;
   handleSubmit: (e: any) => void;
+  key: string;
 };
 
-const PageForm = ({ onClick, header, children, buttonText, handleSubmit }: Props) => {
+const PageForm = ({
+  onClick,
+  header,
+  children,
+  buttonText,
+  handleSubmit,
+  key
+}: Props) => {
   return (
-    <div className="py-8 px-4">
+    <motion.div
+      className="py-8 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      key={key}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
       <div className="flex justify-between items-center mb-8">
         <div className="w-full">
           <div className="w-1/2">
@@ -36,14 +52,17 @@ const PageForm = ({ onClick, header, children, buttonText, handleSubmit }: Props
           <form onSubmit={(e) => handleSubmit(e)}>
             {children}
             <div className="flex justify-end">
-              <Button className="bg-blue-600 text-white hover:bg-blue-500" type="submit">
+              <Button
+                className="bg-blue-600 text-white hover:bg-blue-500"
+                type="submit"
+              >
                 Aceptar
               </Button>
             </div>
           </form>
         </Card>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

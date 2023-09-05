@@ -11,7 +11,7 @@ type Props = {
 const Disappear = ({ currentOption, className, key, children }: Props) => {
   return (
     <motion.div
-      key="dashboard"
+      key={key}
       className={className}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

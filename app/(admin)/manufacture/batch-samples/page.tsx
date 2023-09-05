@@ -22,6 +22,7 @@ const Manufacture = () => {
       onClick={() => router.push('/manufacture/batch-samples/new')}
       header={"Muestras de lote"}
       buttonText="Generar nueva muestra"
+      key="batch-samples"
     >
       <TableContainer>
         <Table
