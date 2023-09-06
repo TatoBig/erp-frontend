@@ -49,7 +49,7 @@ function LayoutDrawer() {
 
   return (
     <>
-      <div className="bg-gray-200 w-96 h-screen p-4 ">
+      <div className="bg-gray-200 w-96 h-full min-h-screen p-4 ">
         <div className="p-4 flex justify-between bg-yellow-200 mb-6">
           <div className="flex">
             <div>icon</div>
