@@ -7,17 +7,22 @@ type Props = {
   header: string;
   children: ReactNode;
   buttonText?: string;
-  key: string;
+  description?: string;
 };
 
-const PageInfo = ({ onClick, key, header, children, buttonText }: Props) => {
+const PageInfo = ({
+  onClick,
+  header,
+  children,
+  buttonText,
+  description,
+}: Props) => {
   return (
     <motion.div
       className="py-8 px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      key={key}
       transition={{ duration: 0.7, ease: "easeInOut" }}
     >
       <div className="flex justify-between items-center mb-8">
@@ -25,11 +30,7 @@ const PageInfo = ({ onClick, key, header, children, buttonText }: Props) => {
           <Heading as="h2" size="2xl">
             {header}
           </Heading>
-          <Text>
-            The quick brown fox jumps over the lazy dog is an English-language
-            pangram—a sentence that contains all of the letters of the English
-            alphabet. Owing to its existence, Chakra was created.
-          </Text>
+          <Text>{description}</Text>
         </div>
         {buttonText && onClick && (
           <Button onClick={() => onClick()} className="mr-8">

@@ -1,6 +1,6 @@
 import { AiOutlineDashboard } from "react-icons/ai";
 import { AnimatePresence, stagger } from "framer-motion";
-import { PiPackage } from "react-icons/pi";
+import { PiPackage, PiToolbox } from "react-icons/pi";
 import { useState } from "react";
 import Disappear from "../animation/Disappear";
 import DrawerButton from "./DrawerButton";
@@ -42,8 +42,23 @@ function LayoutDrawer() {
           title: "Inventario",
           url: "/manufacture/inventory",
         },
+        {
+          title: "Proveedores",
+          url: "/manufacture/providers",
+        },
       ],
       icon: PiPackage,
+    },
+    tools: {
+      title: "Herramientas",
+      description: "Herramientas para personalizar el proceso de producción.",
+      options: [
+        {
+          title: "Etapas de producción",
+          url: "/tools/stages",
+        },
+      ],
+      icon: PiToolbox,
     },
   };
 

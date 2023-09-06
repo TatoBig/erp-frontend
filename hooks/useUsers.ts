@@ -1,3 +1,4 @@
+import HookResponse from "@/types/HookResponse";
 import { useState } from "react";
 
 const useUsers = () => {

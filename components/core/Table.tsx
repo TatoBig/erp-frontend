@@ -27,7 +27,6 @@ const Table = ({ children, headCells }: TableProps) => {
         borderWidth="1px"
         sx={{ borderCollapse: "separate", borderSpacing: "0 8px" }}
       >
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
             {headCells.map((headCell) => (
