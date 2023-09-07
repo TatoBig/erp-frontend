@@ -1,13 +1,13 @@
 import { AiOutlineDashboard } from "react-icons/ai";
-import { PiPackage } from "react-icons/pi";
+import { AnimatePresence, stagger } from "framer-motion";
+import { PiPackage, PiToolbox } from "react-icons/pi";
+import { useState } from "react";
+import Disappear from "../animation/Disappear";
 import DrawerButton from "./DrawerButton";
 import DrawerIcon from "./DrawerIcon";
-import { useState } from "react";
-import { AnimatePresence, stagger } from "framer-motion";
-import Disappear from "../animation/Disappear";
 import MenuOptions from "@/types/MenuOptions";
-
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
+import LogoIcon from "../icons/LogoIcon";
+import ErpInc from "../icons/ErpInc";
 
 function LayoutDrawer() {
   const [currentOption, setCurrentOption] = useState("dashboard");
@@ -17,27 +17,69 @@ function LayoutDrawer() {
       title: "Dashboard",
       description:
         "Ofrece una vista visual de datos empresariales clave para decisiones informadas.",
-      options: ["Web Analytics", "Sales Monitoring", "Ad Campaign"],
+      options: [
+        {
+          title: "Visualización general",
+          url: "/dashboard/overview",
+        },
+      ],
       icon: AiOutlineDashboard,
     },
     manufacture: {
       title: "Manufactura",
       description:
         "Optimiza procesos de producción y control de inventario para mejorar la eficiencia y calidad.",
-      options: ["Web S", "s S", "Ad S"],
+      options: [
+        {
+          title: "Muestras de lote",
+          url: "/manufacture/batch-samples",
+        },
+        {
+          title: "Órdenes de compra",
+          url: "/manufacture/purchase-orders",
+        },
+        {
+          title: "Inventario",
+          url: "/manufacture/inventory",
+        },
+        {
+          title: "Proveedores",
+          url: "/manufacture/providers",
+        },
+      ],
       icon: PiPackage,
+    },
+    tools: {
+      title: "Herramientas",
+      description: "Herramientas para personalizar el proceso de producción.",
+      options: [
+        {
+          title: "Etapas de producción",
+          url: "/tools/stages",
+        },
+        {
+          title: "Estados de producción",
+          url: "/tools/status",
+        },
+        {
+          title: "Ubicaciones",
+          url: "/tools/locations",
+        },
+      ],
+      icon: PiToolbox,
     },
   };
 
   return (
     <>
-      <div className="bg-gray-200 w-96 h-screen p-4 ">
-        <div className="p-4 flex justify-between bg-yellow-200 mb-6">
-          <div className="flex">
-            <div>icon</div>
-            <div>name</div>
+      <div className="bg-gray-200 w-96 h-full min-h-screen p-4 ">
+        <div className="p-4 flex justify-between mb-6">
+          <div className="flex items-center justify-center">
+            <div className="w-24 h-24 -mt-6 -mb-10 ">
+              <LogoIcon />
+            </div>
+            <div className="font-semibold text-3xl font-mono mt-4">ERP INC</div>
           </div>
-          <div>close</div>
         </div>
         <div className="flex ">
           <div className="p-2 w-20 ">
@@ -68,7 +110,9 @@ function LayoutDrawer() {
                       <div className="w-0.5 rounded-full mt-4 bg-gray-300" />
                       <div className="mt-4 mr-4 w-full">
                         {menuOptions[option].options.map((option) => (
-                          <DrawerButton key={option}>{option}</DrawerButton>
+                          <DrawerButton key={option.title} url={option.url}>
+                            {option.title}
+                          </DrawerButton>
                         ))}
                       </div>
                     </div>
