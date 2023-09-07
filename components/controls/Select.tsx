@@ -1,5 +1,5 @@
-import { Input as CkInput, Text } from "@chakra-ui/react";
-import { HTMLInputTypeAttribute } from "react";
+import { Select as ChakraSelect, Text } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 type Props = {
@@ -8,28 +8,29 @@ type Props = {
   label: string;
   r: UseFormRegister<any>;
   name: string;
-  type?: HTMLInputTypeAttribute;
+  children: ReactNode;
 };
 
-const Input = ({
+const Select = ({
   placeholder = "",
   label,
   addPlaceholder,
   r,
   name,
-  type,
+  children,
 }: Props) => {
   return (
     <div>
       <Text>{label}</Text>
-      <CkInput
-        type={type}
+      <ChakraSelect
         placeholder={addPlaceholder ? label : placeholder}
         {...r(name)}
         className="my-4 bg-gray-50"
-      />
+      >
+        {children}
+      </ChakraSelect>
     </div>
   );
 };
 
-export default Input;
+export default Select;

@@ -9,8 +9,6 @@ type NewBatch = {
   description: string;
   unit: string;
   price: number;
-  status_id: number;
-  stage_id: number;
   location_id: number;
   order_id: number;
 };
@@ -25,8 +23,6 @@ const useBatches = () => {
     location_id,
     order_id,
     price,
-    stage_id,
-    status_id,
     unit,
   }: NewBatch): Promise<HookResponse> => {
     const data = await axios.post(`${url}/api/batch`, {
@@ -36,8 +32,8 @@ const useBatches = () => {
       location_id,
       order_id,
       price,
-      stage_id,
-      status_id,
+      stage_id: 3,
+      status_id: 3,
       unit,
     });
     console.log(data);

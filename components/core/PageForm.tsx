@@ -8,7 +8,7 @@ type Props = {
   children: ReactNode;
   buttonText?: string;
   handleSubmit: (e: any) => void;
-  key: string;
+  hideButton?: boolean;
 };
 
 const PageForm = ({
@@ -17,7 +17,7 @@ const PageForm = ({
   children,
   buttonText,
   handleSubmit,
-  key
+  hideButton,
 }: Props) => {
   return (
     <motion.div
@@ -25,7 +25,6 @@ const PageForm = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      key={key}
       transition={{ duration: 0.7, ease: "easeInOut" }}
     >
       <div className="flex justify-between items-center mb-8">
@@ -52,12 +51,14 @@ const PageForm = ({
           <form onSubmit={(e) => handleSubmit(e)}>
             {children}
             <div className="flex justify-end">
-              <Button
-                className="bg-blue-600 text-white hover:bg-blue-500"
-                type="submit"
-              >
-                Aceptar
-              </Button>
+              {!hideButton && (
+                <Button
+                  className="bg-blue-600 text-white hover:bg-blue-500"
+                  type="submit"
+                >
+                  Aceptar
+                </Button>
+              )}
             </div>
           </form>
         </Card>

@@ -8,10 +8,10 @@ import {
   Thead,
   Tfoot,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 type TableProps = {
-  children: ReactNode;
+  children: ReactNode[];
   headCells: {
     isNumeric?: boolean;
     label: string;
@@ -19,6 +19,10 @@ type TableProps = {
 };
 
 const Table = ({ children, headCells }: TableProps) => {
+  useEffect(() => {
+    console.log(children);
+  }, [children]);
+
   return (
     <TableContainer>
       <ChakraTable
@@ -37,15 +41,17 @@ const Table = ({ children, headCells }: TableProps) => {
           </Tr>
         </Thead>
         <Tbody>{children}</Tbody>
-        <Tfoot>
-          <Tr>
-            {headCells.map((headCell) => (
-              <Th key={headCell.label} isNumeric={headCell.isNumeric}>
-                {headCell.label}
-              </Th>
-            ))}
-          </Tr>
-        </Tfoot>
+        {children.length !== 0 && (
+          <Tfoot>
+            <Tr>
+              {headCells.map((headCell) => (
+                <Th key={headCell.label} isNumeric={headCell.isNumeric}>
+                  {headCell.label}
+                </Th>
+              ))}
+            </Tr>
+          </Tfoot>
+        )}
       </ChakraTable>
     </TableContainer>
   );

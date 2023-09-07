@@ -1,37 +1,42 @@
 "use client";
 import PageForm from "@/components/core/PageForm";
+import Input from "@/components/controls/Input";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import useStatuses from "@/hooks/useStatuses";
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
+import useStages from "@/hooks/useStages";
 import Select from "@/components/controls/Select";
-import useProviders from "@/hooks/useProviders";
-import useOrders from "@/hooks/useOrders";
 
 const NewStatus = () => {
   const { register, handleSubmit } = useForm();
-  const { newOrder } = useOrders();
-  const { getProviders, providers } = useProviders();
+  const { newStatus } = useStatuses();
+  const { getStages, stages } = useStages();
   const toast = useToast();
   const router = useRouter();
 
   useEffect(() => {
-    getProviders();
+    getStages();
   }, []);
 
-  const onSubmit = async (data: any) => {
-    const response = await newOrder({
-      provider_id: data.provider_id,
-    });
+  useEffect(() => {
+    console.log(stages);
+  }, [stages]);
 
+  const onSubmit = async (data: any) => {
+    const response = await newStatus({
+      name: data.name,
+      stage_id: data.stage_id,
+    });
     if (response.status === "success") {
       toast({
-        title: "Order inicializada.",
+        title: "Estado creado.",
         status: "success",
         duration: 4000,
         isClosable: true,
       });
-      router.push("/manufacture/purchase-orders/");
+      router.push("/tools/status");
     }
   };
 
@@ -41,14 +46,15 @@ const NewStatus = () => {
       header="Crear nuevo estado"
       handleSubmit={handleSubmit(onSubmit)}
     >
+      <Input name="name" label="Nombre" addPlaceholder r={register} />
       <Select
-        label="Proveedor"
+        label="Etapa perteneciente"
         addPlaceholder
-        name="provider_id"
-        placeholder={"Proveedor"}
+        name="stage_id"
+        placeholder={"Etapa"}
         r={register}
       >
-        {providers.map((s) => (
+        {stages.map((s) => (
           <option key={s.id} value={s.id}>
             {s.name}
           </option>

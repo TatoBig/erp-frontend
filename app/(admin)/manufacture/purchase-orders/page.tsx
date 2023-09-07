@@ -15,6 +15,11 @@ const Page = () => {
     getOrders();
   }, []);
 
+  useEffect(() => {
+    console.log(orders)
+  }, [orders])
+  
+
   return (
     <PageInfo
       description="Crea ordenes de compra."
@@ -26,10 +31,10 @@ const Page = () => {
       <Table
         headCells={[
           {
-            label: "ID",
+            label: "No. Orden",
           },
           {
-            label: "ID Proveedor",
+            label: "Proveedor",
           },
           {
             label: "Ver más",
@@ -39,7 +44,7 @@ const Page = () => {
         {orders.map((order) => (
           <Tr key={order.id}>
             <Td>{order.id}</Td>
-            <Td>{order.provider_id}</Td>
+            <Td>{order.provider?.name ?? ''}</Td>
             <Td>
               <button onClick={() => router.push(`/manufacture/purchase-orders/${order.id}`)}>
                 <PiEye />

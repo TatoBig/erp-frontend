@@ -6,8 +6,8 @@ import Disappear from "../animation/Disappear";
 import DrawerButton from "./DrawerButton";
 import DrawerIcon from "./DrawerIcon";
 import MenuOptions from "@/types/MenuOptions";
-
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
+import LogoIcon from "../icons/LogoIcon";
+import ErpInc from "../icons/ErpInc";
 
 function LayoutDrawer() {
   const [currentOption, setCurrentOption] = useState("dashboard");
@@ -57,6 +57,14 @@ function LayoutDrawer() {
           title: "Etapas de producción",
           url: "/tools/stages",
         },
+        {
+          title: "Estados de producción",
+          url: "/tools/status",
+        },
+        {
+          title: "Ubicaciones",
+          url: "/tools/locations",
+        },
       ],
       icon: PiToolbox,
     },
@@ -65,12 +73,13 @@ function LayoutDrawer() {
   return (
     <>
       <div className="bg-gray-200 w-96 h-full min-h-screen p-4 ">
-        <div className="p-4 flex justify-between bg-yellow-200 mb-6">
-          <div className="flex">
-            <div>icon</div>
-            <div>name</div>
+        <div className="p-4 flex justify-between mb-6">
+          <div className="flex items-center justify-center">
+            <div className="w-24 h-24 -mt-6 -mb-10 ">
+              <LogoIcon />
+            </div>
+            <div className="font-semibold text-3xl font-mono mt-4">ERP INC</div>
           </div>
-          <div>close</div>
         </div>
         <div className="flex ">
           <div className="p-2 w-20 ">

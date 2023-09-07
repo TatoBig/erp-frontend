@@ -1,17 +1,24 @@
 "use client";
 import PageForm from "@/components/core/PageForm";
 import Input from "@/components/controls/Input";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useBatches from "@/hooks/useBatches";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import Select from "@/components/controls/Select";
+import useLocations from "@/hooks/useLocations";
 
 const NewBatch = ({ params }: { params: { id: string } }) => {
   const { register, handleSubmit } = useForm();
   const toast = useToast();
   const { newBatch } = useBatches();
+  const { getLocations, locations } = useLocations();
   const router = useRouter();
+
+  useEffect(() => {
+    getLocations();
+  }, []);
 
   const onSubmit = async (data: any) => {
     console.log(data);
@@ -20,8 +27,6 @@ const NewBatch = ({ params }: { params: { id: string } }) => {
       description: data.description,
       unit: data.unit,
       price: Number(data.price) * 100,
-      status_id: Number(data.status_id),
-      stage_id: Number(data.stage_id),
       location_id: Number(data.location_id),
       order_id: Number(params.id),
     });
@@ -42,18 +47,27 @@ const NewBatch = ({ params }: { params: { id: string } }) => {
       header="Agregar nuevo lote"
       handleSubmit={handleSubmit(onSubmit)}
     >
-      <Input name="amount" label="Cantidad" addPlaceholder r={register} />
       <Input
         name="description"
         label="Descripción"
         addPlaceholder
         r={register}
       />
+      <Input name="amount" label="Cantidad" addPlaceholder r={register} />
       <Input name="unit" label="Unidad" addPlaceholder r={register} />
-      <Input name="price" label="Precio" addPlaceholder r={register} />
-      <Input name="status_id" label="Estado" addPlaceholder r={register} />
-      <Input name="stage_id" label="Etapa" addPlaceholder r={register} />
-      <Input name="location_id" label="Ubicación" addPlaceholder r={register} />
+      <Input name="price" label="Precio total" addPlaceholder r={register} />
+      <Select
+        label="Ubicación destino"
+        addPlaceholder
+        name="location_id"
+        r={register}
+      >
+        {locations.map((s) => (
+          <option key={s.id} value={s.id}>
+            {s.name}
+          </option>
+        ))}
+      </Select>
     </PageForm>
   );
 };
