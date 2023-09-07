@@ -3,15 +3,13 @@ import { motion } from "framer-motion";
 
 type Props = {
   className: string;
-  key: string;
   children: ReactNode;
   currentOption: string;
 };
 
-const Disappear = ({ currentOption, className, key, children }: Props) => {
+const Disappear = ({ currentOption, className, children }: Props) => {
   return (
     <motion.div
-      key="dashboard"
       className={className}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
